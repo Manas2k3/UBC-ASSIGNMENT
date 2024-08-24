@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uc_assignment/components/payments_page_dropdown.dart';
+import 'package:uc_assignment/components/PaymentsPage/payments_page_dropdown.dart';
 import 'package:uc_assignment/views/card_details_page.dart';
 
 class PaymentsPage extends StatefulWidget {
