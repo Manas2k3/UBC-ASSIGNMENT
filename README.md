@@ -1,3 +1,3 @@
 # uc_assignment
 
-Replicated the Loan Section of the app
+Replicated the Loan Section
