@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uc_assignment/components/down_payment_dropdown.dart';
+import 'package:uc_assignment/components/down_payment_textfield.dart';
 import 'package:uc_assignment/components/loan_type_dropdown.dart';
 import 'package:uc_assignment/components/payment_interval_radio_button.dart';
 import 'package:uc_assignment/components/tenure_months_dropdown.dart';
