@@ -1,6 +1,6 @@
 # uc_assignment
 
-A new Flutter project.
+Replicated the Loan Section of the app
 
 ## Getting Started
 
