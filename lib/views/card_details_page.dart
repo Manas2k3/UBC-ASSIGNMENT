@@ -17,6 +17,8 @@ class CardDetailsPage extends StatefulWidget {
 }
 
 class _CardDetailsPageState extends State<CardDetailsPage> {
+  TextEditingController _expiryDateController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   String? _cardHolderName;
@@ -30,7 +32,28 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
     return _cardHolderName?.isNotEmpty == true &&
         _cardNumber?.isNotEmpty == true &&
         _cvv?.isNotEmpty == true &&
-        _expiryDate?.isNotEmpty == true;
+        _expiryDate?.isNotEmpty == true &&
+        _validateExpiryDate(_expiryDate!);
+  }
+
+//Info: for checking the length of the cvv value
+  bool _validateCvv(String value) {
+    if (value.length != 3) {
+      return false;
+    }
+    return true;
+  }
+
+  // Info: For adding the slash in the expiry date text form field
+  bool _validateExpiryDate(String value) {
+    if (value.length != 5) return false;
+    final parts = value.split('/');
+    if (parts.length != 2) return false;
+    final month = int.tryParse(parts[0]);
+    final year = int.tryParse(parts[1]);
+    if (month == null || year == null) return false;
+    if (month < 1 || month > 12) return false;
+    return true;
   }
 
   @override
@@ -119,9 +142,15 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                   cursorColor: Colors.grey,
                   decoration: const InputDecoration(
                     floatingLabelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.grey), // Color when focused
                     ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.grey), // Color when not focused
+                    ),
+                    border: InputBorder.none, // Remove the border
                     labelText: 'Full Name',
                   ),
                   onChanged: (value) {
@@ -141,9 +170,15 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                   cursorColor: Colors.grey,
                   decoration: const InputDecoration(
                     floatingLabelStyle: TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.grey), // Color when focused
                     ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.grey), // Color when not focused
+                    ),
+                    border: InputBorder.none, // Remove the border
                     labelText: 'Enter Card Number',
                   ),
                   onChanged: (value) {
@@ -165,14 +200,28 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            cursorColor: Colors.grey,
                             keyboardType: TextInputType.number,
                             obscureText: true,
                             style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
-                              label: Text(
+                            decoration: InputDecoration(
+                              label: const Text(
                                 'CVV',
                                 style: TextStyle(color: Colors.white),
                               ),
+                              errorText: _validateCvv(_cvv ?? '')
+                                  ? null
+                                  : 'CVV must be 3 digits',
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.grey), // Color when focused
+                              ),
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color:
+                                        Colors.grey), // Color when not focused
+                              ),
+                              border: InputBorder.none,
                             ),
                             onChanged: (value) {
                               _cvv = value;
@@ -193,19 +242,43 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            cursorColor: Colors.grey,
+                            controller: _expiryDateController,
                             keyboardType: TextInputType.number,
                             style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
-                              label: Text(
-                                'MM/YY',
-                                style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                              labelText: 'MM/YY',
+                              labelStyle: const TextStyle(color: Colors.white),
+                              errorText: _expiryDate != null &&
+                                      !_validateExpiryDate(_expiryDate!)
+                                  ? 'Invalid date format. Use MM/YY'
+                                  : null,
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.grey), // Color when focused
                               ),
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color:
+                                        Colors.grey), // Color when not focused
+                              ),
+                              border: InputBorder.none, // Remove the border
                             ),
                             onChanged: (value) {
-                              _expiryDate = value;
+                              if (value.length == 2 &&
+                                  !_expiryDateController.text.contains('/')) {
+                                _expiryDateController.text = value + '/';
+                                _expiryDateController.selection =
+                                    TextSelection.fromPosition(
+                                  TextPosition(
+                                      offset:
+                                          _expiryDateController.text.length),
+                                );
+                              }
+                              _expiryDate = _expiryDateController.text;
                               setState(() {});
                             },
-                          ),
+                          )
                         ],
                       ),
                     ),
