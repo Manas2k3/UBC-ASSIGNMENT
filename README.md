@@ -36,7 +36,7 @@ Once the installation is complete, you can run the app on an emulator or a physi
 
 ---
 
-**Screenshots**
+**__Screenshots__**
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5afd6780-1d17-404d-9087-fdde47b1626c" width="250" height="500">
   <img src="https://github.com/user-attachments/assets/6da7ef20-3d64-4d6f-82c0-d55a4b842d60" width="250" height="500">
