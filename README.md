@@ -36,4 +36,15 @@ Once the installation is complete, you can run the app on an emulator or a physi
 
 ---
 
+**Screenshots**
+![pic - 1](https://github.com/user-attachments/assets/5afd6780-1d17-404d-9087-fdde47b1626c)
+![pic - 2](https://github.com/user-attachments/assets/6da7ef20-3d64-4d6f-82c0-d55a4b842d60)
+![pic - 3](https://github.com/user-attachments/assets/3ae92b06-4c7f-43a3-94b9-6e6b3256b3d7)
+![pic - 4](https://github.com/user-attachments/assets/e4a5fae9-85f5-46be-a9ef-dfc0638c34ff)
+![pic - 5](https://github.com/user-attachments/assets/a1ad5a3d-1a46-4f66-9853-b6cf4d7127f7)
+![pic - 6](https://github.com/user-attachments/assets/fb4f6e38-e0de-4e93-ac8d-c34c7d698e3c)
+![pic - 7](https://github.com/user-attachments/assets/b797d8e8-bfd5-4693-b287-1dbde407f4d2)
+
+
+
 This version focuses only on the essential steps to install and run your Flutter app.
